@@ -19,6 +19,7 @@ const AddProduct = () => {
       const response = await addProduct(productData);
       if (response && response.success) {
         console.log('Product added successfully!');
+        window.alert('The product has been added.')
       } else {
         console.error('Failed to add product.', response.message);
       }

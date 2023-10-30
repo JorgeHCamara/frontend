@@ -37,6 +37,10 @@ const ProductList = () => {
     }
   };
 
+  const mathFloor = (num: number): number => {
+    return Math.floor(num * 100) / 100;
+  }
+
   return (
     <Table>
       <TableHead>
@@ -57,8 +61,8 @@ const ProductList = () => {
             <TableCell>{product.description}</TableCell>
             <TableCell>{product.color}</TableCell>
             <TableCell>{product.category}</TableCell>
-            <TableCell>${product.price}</TableCell>
-            <TableCell>${product.promotional_price}</TableCell>
+            <TableCell>${(product.price).toFixed(2)}</TableCell>
+            <TableCell>${mathFloor(product.promotional_price).toFixed(2)}</TableCell>
             <TableCell>
               <Button variant="outlined" color="warning" onClick={() => handleDeleteProduct(product.id)}>
                 Delete
