@@ -9,9 +9,9 @@ export const getProducts = async () => {
 
 export const addProduct = async (productData: {
   name: string;
-  category: string;
-  color: string;
   description: string;
+  color: string;
+  category: string;
   price: number;
   promotional_price: number;
 }) => {

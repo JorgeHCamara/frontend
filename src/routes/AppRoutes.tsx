@@ -1,11 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
 import ProductList from '../components/ProductList';
+import AddProduct from '../components/AddProduct/AddProduct';
 
-const AppRoutes: React.FC = () => {
+const AppRoutes = () => {
 
     return(
         <Routes>
             <Route path='/' element={<ProductList />}></Route>
+            <Route path='/add-product' element={<AddProduct />}></Route>
         </Routes>
     )
 }
