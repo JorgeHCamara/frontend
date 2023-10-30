@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addProduct } from '../../api/ProductApi';
+import { addProduct } from '../../services/ProductApi';
 import { getDiscount, DiscountCategories } from '../../services/DiscountService'; // Adjust the path based on your project structure
 import { Button, TextField, Container, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 
