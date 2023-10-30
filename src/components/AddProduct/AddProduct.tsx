@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addProduct } from '../../api/ProductApi';
+import { Button, TextField, Container, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 
 const AddProduct = () => {
   const [productData, setProductData] = useState({
@@ -36,54 +37,67 @@ const AddProduct = () => {
     setProductData(prevData => ({ ...prevData, [name]: updatedValue }));
   };
 
+  const handleSelectChange = (event: SelectChangeEvent<string>) => {
+    const { name, value } = event.target;
+    setProductData((prevData) => ({ ...prevData, [name as string]: value }));
+  };
+
   return (
-    <div>
-      <h2>Add Product</h2>
+    <Container>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
+        <TextField
+          fullWidth
+          margin="normal"
           name="name"
-          placeholder="Name"
+          label="Name"
           value={productData.name}
           onChange={handleChange}
         />
-        <input
+        <TextField
+          fullWidth
+          margin="normal"
           name="description"
-          placeholder="Description"
+          label="Description"
           value={productData.description}
           onChange={handleChange}
         />
-        <input
-          type="text"
+        <TextField
+          fullWidth
+          margin="normal"
           name="color"
-          placeholder="Color"
+          label="Color"
           value={productData.color}
           onChange={handleChange}
         />
-        <input
-          type="text"
+        <InputLabel>
+          Product Type
+        </InputLabel>
+        <Select
+          fullWidth
           name="category"
-          placeholder="Category"
           value={productData.category}
-          onChange={handleChange}
-        />
-        <input
+          onChange={handleSelectChange}
+        >
+          <MenuItem value="Appliances">Appliances</MenuItem>
+          <MenuItem value="Furniture">Furniture</MenuItem>
+          <MenuItem value="Refrigerators">Refrigerators</MenuItem>
+          <MenuItem value="Smartphones">Smartphones</MenuItem>
+          <MenuItem value="Eletronics">Electronics</MenuItem>
+        </Select>
+        <TextField
+          fullWidth
+          margin="normal"
           type="number"
           name="price"
-          placeholder="Price"
+          label="Price"
           value={productData.price}
           onChange={handleChange}
         />
-        <input
-          type="number"
-          name="promotional_price"
-          placeholder="Promotional Price"
-          value={productData.promotional_price}
-          onChange={handleChange}
-        />
-        <button type="submit">Add Product</button>
+        <Button variant="contained" color="primary" type="submit">
+          Add Product
+        </Button>
       </form>
-    </div>
+    </Container>
   );
 };
 
