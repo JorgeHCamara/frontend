@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { Product } from '../interfaces/Product';
-import { getProducts } from '../api/ProductApi';
+import { getProducts } from '../services/ProductApi';
 
 const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);

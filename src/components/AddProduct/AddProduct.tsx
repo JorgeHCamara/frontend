@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addProduct } from '../../api/ProductApi';
+import { getDiscount, DiscountCategories } from '../../services/DiscountService'; // Adjust the path based on your project structure
 import { Button, TextField, Container, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 
 const AddProduct = () => {
@@ -7,7 +8,7 @@ const AddProduct = () => {
     name: '',
     description: '',
     color: '',
-    category: '',
+    category: '' as DiscountCategories,
     price: 0,
     promotional_price: 0
   });
@@ -29,18 +30,33 @@ const AddProduct = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     let updatedValue: string | number = value;
-
-    if (name === 'price' || name === 'promotional_price') {
-        updatedValue = parseFloat(value);
+  
+    if (name === 'price') {
+      updatedValue = parseFloat(value);
     }
-
-    setProductData(prevData => ({ ...prevData, [name]: updatedValue }));
+  
+    setProductData(prevData => {
+      const updatedData = { ...prevData, [name]: updatedValue };
+  
+      if (name === 'price' && typeof updatedValue === 'number') {
+        const discount = getDiscount(updatedData.category);
+        updatedData.promotional_price = updatedValue * (1 - discount / 100);
+      }
+  
+      return updatedData;
+    });
   };
 
   const handleSelectChange = (event: SelectChangeEvent<string>) => {
     const { name, value } = event.target;
-    setProductData((prevData) => ({ ...prevData, [name as string]: value }));
-  };
+
+    setProductData(prevData => {
+      const updatedData = { ...prevData, [name]: value };
+      const discount = getDiscount(value as DiscountCategories);
+      updatedData.promotional_price = updatedData.price * (1 - discount / 100);
+      return updatedData;
+    });
+};
 
   return (
     <Container>
@@ -82,7 +98,7 @@ const AddProduct = () => {
           <MenuItem value="Furniture">Furniture</MenuItem>
           <MenuItem value="Refrigerators">Refrigerators</MenuItem>
           <MenuItem value="Smartphones">Smartphones</MenuItem>
-          <MenuItem value="Eletronics">Electronics</MenuItem>
+          <MenuItem value="Electronics">Electronics</MenuItem>
         </Select>
         <TextField
           fullWidth
