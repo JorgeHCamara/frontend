@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { Product } from '../interfaces/Product';
-import { getProducts } from '../api/api';
+import { getProducts } from '../api/ProductApi';
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);

@@ -1,11 +1,15 @@
-import ProductList from "./components/ProductList";
+import AppRoutes from "./routes/AppRoutes";
+import Menu from './components/Menu/Menu';
+import { BrowserRouter as Router } from 'react-router-dom';
+import './GlobalStyles.css'
 
 const App = () => {
 
   return(
-    <>
-      <ProductList />
-    </>
+    <Router>
+      <Menu />
+      <AppRoutes />
+    </Router>
   )
 }
 
