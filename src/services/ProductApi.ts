@@ -16,5 +16,12 @@ export const addProduct = async (productData: {
   promotional_price: number;
 }) => {
   const response = await axios.post(`${BASE_URL}/add`, productData);
+  window.alert('The product has been added.')
+  return response.data;
+};
+
+export const deleteProduct = async (productId: number) => {
+  const response = await axios.delete(`${BASE_URL}/delete/${productId}`);
+  window.alert('The product has been deleted.')
   return response.data;
 };

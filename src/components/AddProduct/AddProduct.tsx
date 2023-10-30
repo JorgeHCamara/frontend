@@ -109,7 +109,7 @@ const AddProduct = () => {
           value={productData.price}
           onChange={handleChange}
         />
-        <Button variant="contained" color="primary" type="submit">
+        <Button variant="contained" color="success" type="submit">
           Add Product
         </Button>
       </form>

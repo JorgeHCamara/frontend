@@ -5,9 +5,11 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Button,
 } from '@mui/material';
 import { Product } from '../interfaces/Product';
 import { getProducts } from '../services/ProductApi';
+import { deleteProduct } from '../services/ProductApi';
 
 const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,6 +23,20 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
+  const handleDeleteProduct = async (id: number) => {
+    try {
+      const response = await deleteProduct(id);
+  
+      if (response.success) {
+        setProducts(products.filter(product => product.id !== id));
+      } else {
+        console.error('Failed to delete product.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <Table>
       <TableHead>
@@ -31,6 +47,7 @@ const ProductList = () => {
           <TableCell>Product Type</TableCell>
           <TableCell>Price</TableCell>
           <TableCell>Promotional Price</TableCell>
+          <TableCell>#</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -42,6 +59,11 @@ const ProductList = () => {
             <TableCell>{product.category}</TableCell>
             <TableCell>${product.price}</TableCell>
             <TableCell>${product.promotional_price}</TableCell>
+            <TableCell>
+              <Button variant="outlined" color="warning" onClick={() => handleDeleteProduct(product.id)}>
+                Delete
+              </Button>
+          </TableCell>
           </TableRow>
         ))}
       </TableBody>
