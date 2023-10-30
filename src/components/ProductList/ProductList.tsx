@@ -7,16 +7,13 @@ import {
   TableRow,
   Button,
   IconButton,
-  TextField,
-  InputLabel,
-  Select,
-  MenuItem,
 } from '@mui/material';
-import { Product } from '../interfaces/Product';
-import { getProducts, deleteProduct } from '../services/ProductApi';
+import { Product } from '../../interfaces/Product';
+import { getProducts, deleteProduct } from '../../services/ProductApi';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import './ProductList.css'
+import FilterSection from '../FilterSection/FilterSection';
 
 const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -82,38 +79,12 @@ const ProductList = () => {
 
   return (
     <>
-      <div className="filter-section">
-        <InputLabel>
-          Filter by Name
-        </InputLabel>
-        <TextField 
-          variant="outlined"
-          value={nameFilter}
-          onChange={(e) => setNameFilter(e.target.value)}
-        />
-        <InputLabel>
-          Product Type
-        </InputLabel>
-        <Select 
-          label="Filter by Category"
-          variant="outlined"
-          className="categoryInput"
-          value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value)}
-        >
-          <MenuItem value="Appliances">Appliances</MenuItem>
-          <MenuItem value="Furniture">Furniture</MenuItem>
-          <MenuItem value="Refrigerators">Refrigerators</MenuItem>
-          <MenuItem value="Smartphones">Smartphones</MenuItem>
-          <MenuItem value="Electronics">Electronics</MenuItem>
-        </Select>
-        <Button onClick={() => {
-          setNameFilter('');
-          setCategoryFilter('');
-        }}>
-          Clear Filters
-        </Button>
-      </div>
+      <FilterSection 
+          nameFilter={nameFilter}
+          setNameFilter={setNameFilter}
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+      />
       <Table>
         <TableHead>
             <TableRow>

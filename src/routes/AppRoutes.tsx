@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import ProductList from '../components/ProductList';
+import ProductList from '../components/ProductList/ProductList';
 import AddProduct from '../components/AddProduct/AddProduct';
 
 const AppRoutes = () => {
