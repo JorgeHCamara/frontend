@@ -1,4 +1,4 @@
-# Apollo Solutions - Frontend
+# React | TypeScript - Frontend
 
 <font size="3">**Setup and Running the Project**</font>
 
